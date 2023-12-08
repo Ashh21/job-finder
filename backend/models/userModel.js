@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -8,7 +7,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    email: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true },
+    email: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        required: [true, "can't be blank"],
+        match: [/\S+@\S+\.\S+/, 'is invalid'],
+        index: true
+    },
     mobile: {
         type: Number,
         required: true,
@@ -17,6 +23,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-}, { timestamps: true })
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
+})
 
-module.exports = mongoose.model('UserData', userSchema)
+module.exports = mongoose.model('UserData', userSchema)  

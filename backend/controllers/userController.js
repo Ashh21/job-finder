@@ -5,14 +5,17 @@ const User = require('../models/userModel')
 const create = async (req, res, next) => {
     try {
         const { name, email, mobile, password } = req.body
-
+        if (!name || !email || !mobile || !password) {
+            return res.status(400).json({
+                message: 'please fill all required fields'
+            })
+        }
         const encryptPassword = await bcrypt.hash(password, 10)
         const user = await User.create({
             name, email, mobile, password: encryptPassword
         })
 
         const jwttoken = jwt.sign({ email }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
-        await user.save()
         res.status(200).json({
             user,
             jwttoken,
@@ -29,7 +32,13 @@ const login = async (req, res, next) => {
     try {
         const { email, password } = req.body
 
-        if (!email || !email.match(/\S+@\S+\.\S+/)) {
+        if(!email || !password){
+            return res.status(401).json({
+                message: 'Email and password required'
+            })
+        }
+
+        if (!email.match(/\S+@\S+\.\S+/)) {
             return res.status(401).json({
                 message: 'InvalidEmail'
             })
@@ -66,8 +75,10 @@ const login = async (req, res, next) => {
 
 const authentication = async (req, res, next) => {
     try {
-        const { jwttoken } = req.headers.authorization
-        const user = await jwt.verify(jwttoken, process.env.JWT_SECRET_KEY)
+        let token = req.headers['Authorization'] ||  req.headers['authorization']
+        token = token.split(' ')[1];
+        console.log(req.headers)
+        const user = await jwt.verify(token, process.env.JWT_SECRET_KEY)
         req.user = user
         next()
     }

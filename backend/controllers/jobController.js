@@ -6,10 +6,10 @@ const createJob = async (req, res, next) => {
 
         if (!companyName || !logoUrl || !jobPosition || !salary || !jobType || !jobPref || !location || !jobDescription || !aboutCompany || !skillsRequired || !information) {
             return res.status(400).json({
-                message: 'All fields required'
+                message: 'All fields required! '
             })
         }
-        const newJob = await JobData.create(req.body)
+        const newJob = await JobData.create({ ...req.body, userId: req.user._id, updatedAt: null, })
         res.status(200).json({
             message: 'Job created successfully',
             newJob
@@ -17,10 +17,10 @@ const createJob = async (req, res, next) => {
     }
     catch (err) {
         next(err)
-     }
-
-
+    }
 }
+
+
 
 
 module.exports = { createJob }

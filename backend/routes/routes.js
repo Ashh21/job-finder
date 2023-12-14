@@ -1,6 +1,6 @@
 const express = require('express')
 const { create, login, authentication } = require('../controllers/userController')
-const { createJob, updateJob, getFilterdData } = require('../controllers/jobController')
+const { createJob, updateJob, getFilterdData, getJobDetails } = require('../controllers/jobController')
 
 const router = express.Router()
 
@@ -9,7 +9,8 @@ router
     .post('/login', login)
     .post('/job', authentication, createJob,)
     .patch('/job/:id', authentication, updateJob,)
-    .get('/jobs', authentication, getFilterdData)
+    .get('/job', authentication, getFilterdData)
+    .get('/job/:id', authentication, getJobDetails)
 
 
 

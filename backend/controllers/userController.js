@@ -27,7 +27,8 @@ const create = async (req, res, next) => {
         res.status(200).json({
             user,
             jwttoken,
-            message: "user registered successfully"
+            reacruiterName: user.name,
+            message: `${user.name} registered successfully`
         })
         // res.redirect()
     }
@@ -62,11 +63,12 @@ const login = async (req, res, next) => {
         const isPasswordMatched = await bcrypt.compare(password, user.password)
 
         if (isPasswordMatched) {
-            const token = { userId: user._id, email: user.email }
+            const token = { _id: user._id, email: user.email }
             const jwttoken = jwt.sign(token, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
             return res.status(200).json({
                 message: "Login successful",
                 jwttoken,
+                reacruiterName: user.name
             })
             // res.redirect()
         }

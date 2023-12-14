@@ -1,3 +1,4 @@
+const { JsonWebTokenError } = require('jsonwebtoken')
 const JobData = require('../models/jobModel')
 
 const createJob = async (req, res, next) => {
@@ -11,7 +12,7 @@ const createJob = async (req, res, next) => {
         }
         let skillsArray = skillsRequired
         if (typeof skillsRequired === String) {
-            const skillsArray = skillsRequired.split(',').map(e => e.trim())
+            skillsArray = skillsRequired.split(',').map(e => e.trim())
         }
 
         const newJob = await JobData.create({ ...req.body, userId: req.user._id, skillsRequired: skillsArray, updatedAt: null, })
@@ -50,12 +51,12 @@ const getFilterdData = async (req, res, next) => {
         const { skillsRequired } = req.query;
         if (!skillsRequired || !skillsRequired.trim() === '') {
             return res.status(404).json({
-                message: "Skills required parameter is missing!"
+                message: "SkillsRequired and jobTitle parameter is missing!"
             })
         }
 
         const filter = {
-            skillsRequired: { $in: skillsRequired.split(',').map(e => e.trim()) }
+            skillsRequired: { $in: skillsRequired.split(',').map(e => e.trim()) },
         }
 
         const filteredJobs = await JobData.find(filter);
@@ -67,5 +68,23 @@ const getFilterdData = async (req, res, next) => {
     }
 }
 
+const getJobDetails = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        console.log(id)
+        if (!id) {
+            return res.status(404).json({
+                message: 'Invalid id!, Job not found'
+            })
+        }
+        const job = await JobData.findById(id)
+        res.status(200).json({
+            job
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+}
 
-module.exports = { createJob, updateJob, getFilterdData }
+module.exports = { createJob, updateJob, getFilterdData, getJobDetails }

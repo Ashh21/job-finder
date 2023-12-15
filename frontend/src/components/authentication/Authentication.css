@@ -4,13 +4,13 @@
     height: 100vh;
 }
 
-.authentication-input-div {
+.authentication-form {
     width: 62.35vw;
     display: block;
-    padding: 7rem 10rem;
+    padding: 7rem 12rem;
 }
 
-.authentication-input-div>h1 {
+.authentication-form>h1 {
     color: #000;
     font-family: DM Sans;
     font-size: 2.5rem;
@@ -19,17 +19,13 @@
     line-height: 144.023%;
 }
 
-.authentication-input-div>p {
+.authentication-form>p {
     color: #525252;
     font-family: DM Sans;
     font-size: 1.3125rem;
     font-style: normal;
     font-weight: 500;
     line-height: 144.023%;
-}
-
-.authentication-img-div {
-    /* position: relative; */
 }
 
 .authentication-img-div>img {
@@ -94,3 +90,7 @@
     font-weight: 500;
     line-height: 144.023%;
 }
+
+/* span{
+    padding: 1rem 0;
+} */

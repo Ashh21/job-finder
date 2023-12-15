@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import '../authentication/Authentication.css';
 import bg from '../images/image 466.svg'
 
+import axios from 'axios';
+
 
 const Authentication = () => {
     const [signIn, setSignIn] = useState(false)
@@ -9,10 +11,76 @@ const Authentication = () => {
     const [email, setEmail] = useState('')
     const [mobile, setMobile] = useState('')
     const [password, setPassword] = useState('')
+    const [isChecked, setIsChecked] = useState(false)
+    const [error, setError] = useState("")
 
+    const isNameValid = /^[A-Za-z\s]+$/.test(name);
+    const isEmailValid = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(email)
+    const isMobileValid = /^[6-9]\d{9}$/.test(mobile);
+    const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password)
 
-    const clickHandler = () => {
+    const register = async () => {
+        const signUpErrors = {
+            name: !isNameValid ? "Enter a valid name" : "",
+            email: !isEmailValid ? "Email address is invalid" : "",
+            mobile: !isMobileValid ? "Enter a valid mobile number" : "",
+            password: !isPasswordValid ? "Enter a valid password" : "",
+            check: !isChecked ? "Check this box if you want to proceed" : "",
+        }
 
+        if (Object.values(signUpErrors).every(err => err === "")) {
+            try {
+                const result = await axios.post('http://localhost:4000/api/register', { name, email, mobile, password })
+                console.log(result)
+                if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
+                    localStorage.setItem("signupData", JSON.stringify(result?.data))
+                }
+                setName('')
+                setEmail('')
+                setMobile('')
+                setPassword('')
+                setIsChecked(false)
+                setError('')
+            }
+            catch (err) { console.log(err) }
+
+        } else {
+            setError(signUpErrors)
+        }
+    }
+
+    const login = async () => {
+        const loginErrors = {
+            email: !isEmailValid ? "Email address is invalid" : "",
+            password: !password ? "Enter a valid password" : ""
+        }
+
+        if (Object.values(loginErrors).every(err => err === "")) {
+            try {
+                const result = await axios.post('http://localhost:4000/api/login', { email, password })
+                console.log(result)
+
+                if (result?.data?.message === "Login successful") {
+                    alert('Login successful')
+                    localStorage.setItem("loginData", JSON.stringify(result?.data))
+                }
+                setEmail('')
+                setPassword('')
+                setError('')
+            }
+            catch (err) { console.log(err) }
+
+        } else {
+            setError(loginErrors)
+        }
+    }
+
+    const clickHandler = async () => {
+        if (!signIn) {
+            register()
+        } else {
+            login()
+        }
     }
 
     const toggle = () => {
@@ -22,7 +90,7 @@ const Authentication = () => {
     return (
         <div className='authentication'>
             <form onSubmit={(e) => e.preventDefault()}
-                className='authentication-input-div'>
+                className='authentication-form'>
                 <h1>
                     {signIn ? "Already have an account?" : "Create an account"}
                 </h1>
@@ -35,11 +103,13 @@ const Authentication = () => {
                     }} value={name}
                         type="text" placeholder='Name' />
                 }
+                {!signIn && <span>{error.name}</span>}
 
                 <input className='input' onChange={(e) => {
                     setEmail(e.target.value)
                 }} value={email}
                     type="text" placeholder='Email' />
+                <span>{error.email}</span>
 
                 {!signIn &&
                     <input className='input' onChange={(e) => {
@@ -47,21 +117,24 @@ const Authentication = () => {
                     }} value={mobile}
                         type="text" placeholder='Mobile' />
                 }
+                {!signIn && <span>{error.mobile}</span>}
+
                 <input className='input' onChange={(e) => {
                     setPassword(e.target.value)
                 }} value={password}
                     type="text" placeholder='Password' />
+                <div>{error.password}</div>
 
                 {!signIn &&
                     <div className='checkbox' >
-                        <input type="checkbox" />
+                        <input type="checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
                         <label> By creating an account, I agree to our terms of use and privacy policy</label>
                     </div>
                 }
+                {!signIn && <div>{error.check}</div>}
 
                 <button onClick={clickHandler}
                     className='auth-btn'> {signIn ? "Sign in" : "Create Account"}
-
                 </button>
                 <p className='toggle'>{signIn ? " Don’t have an account?" : "Already have an account? "}
                     <strong onClick={toggle}>

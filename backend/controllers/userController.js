@@ -25,7 +25,6 @@ const create = async (req, res, next) => {
 
         const jwttoken = jwt.sign({ email, _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
         res.status(200).json({
-            user,
             jwttoken,
             reacruiterName: user.name,
             message: `${user.name} registered successfully`

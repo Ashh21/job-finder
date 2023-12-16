@@ -42,7 +42,7 @@ const Authentication = () => {
                 setIsChecked(false)
                 setError('')
             }
-            catch (err) { console.log(err) }
+            catch (err) { setError(err) }
 
         } else {
             setError(signUpErrors)
@@ -68,7 +68,7 @@ const Authentication = () => {
                 setPassword('')
                 setError('')
             }
-            catch (err) { console.log(err) }
+            catch (err) { setError(err) }
 
         } else {
             setError(loginErrors)
@@ -98,32 +98,32 @@ const Authentication = () => {
                 <p>Your personal job finder is here</p>
 
                 {!signIn &&
-                    <input className='input' onChange={(e) => {
+                    <input className={error.name ? "input-err" : 'input'} onChange={(e) => {
                         setName(e.target.value)
                     }} value={name}
                         type="text" placeholder='Name' />
                 }
-                {!signIn && <span>{error.name}</span>}
+                {!signIn && <span className='error'>{error.name}</span>}
 
-                <input className='input' onChange={(e) => {
+                <input className={error.email ? "input-err" : 'input'} onChange={(e) => {
                     setEmail(e.target.value)
                 }} value={email}
                     type="text" placeholder='Email' />
-                <span>{error.email}</span>
+                <span className='error'>{error.email}</span>
 
                 {!signIn &&
-                    <input className='input' onChange={(e) => {
+                    <input className={error.mobile ? "input-err" : 'input'} onChange={(e) => {
                         setMobile(e.target.value)
                     }} value={mobile}
                         type="text" placeholder='Mobile' />
                 }
-                {!signIn && <span>{error.mobile}</span>}
+                {!signIn && <span className='error'>{error.mobile}</span>}
 
-                <input className='input' onChange={(e) => {
+                <input className={error.password ? "input-err" : 'input'} onChange={(e) => {
                     setPassword(e.target.value)
                 }} value={password}
                     type="text" placeholder='Password' />
-                <div>{error.password}</div>
+                <div className='error'>{error.password} </div>
 
                 {!signIn &&
                     <div className='checkbox' >
@@ -131,7 +131,7 @@ const Authentication = () => {
                         <label> By creating an account, I agree to our terms of use and privacy policy</label>
                     </div>
                 }
-                {!signIn && <div>{error.check}</div>}
+                {!signIn && <div className='error'>{error.check}</div>}
 
                 <button onClick={clickHandler}
                     className='auth-btn'> {signIn ? "Sign in" : "Create Account"}

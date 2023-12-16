@@ -1,0 +1,59 @@
+.add-job-div {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.add-job-form {
+    display: block;
+    width: 60vw;
+    padding: 1rem 5rem;
+}
+
+.add-job-form-input {
+    width: 70%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin-top: 0.85rem;
+    border-radius: 0.325rem;
+    border: 1px solid #C2C2C2;
+    outline: none;
+    color: #ADADAD;
+}
+
+.add-job-form-input0 {
+    width: 70%;
+    height: 5rem;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin-top: 0.85rem;
+    border-radius: 0.325rem;
+    border: 1px solid #C2C2C2;
+    outline: none;
+    color: #ADADAD;
+}
+
+::placeholder {
+    color: #ADADAD;
+}
+
+.add-job-img>img {
+    width: 40vw;
+    height: 100vh;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.add-job-img-h2{
+    color: #fff;
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 144.023%;
+    z-index: 10;
+    position: absolute;
+    top: 3rem;
+    right: 3%;
+}

@@ -1,12 +1,31 @@
 import './App.css';
-import { Body } from './components/Body';
+import { Outlet, createBrowserRouter } from 'react-router-dom'
+import { Authentication } from './components/authentication/Authentication';
+import { AddJob } from './components/addjob/AddJob';
 
 const App = () => {
   return (
     <div className="App">
-      <Body />
+      <Outlet />
     </div>
   );
 }
 
-export { App };
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <Authentication />,
+      },
+      {
+        path: '/addJob',
+        element: <AddJob />
+      }
+    ]
+  }
+])
+
+export { App, appRouter };

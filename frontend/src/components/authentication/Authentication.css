@@ -52,9 +52,18 @@
 .input {
     width: 100%;
     padding: 1rem;
-    margin-top: 1rem;
+    margin-top: 0.85rem;
     border-radius: 0.325rem;
     border: 2px solid #C2C2C2;
+    outline: none;
+}
+
+.input-err{
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.85rem;
+    border-radius: 0.325rem;
+    border: 1px solid #ED5353;
     outline: none;
 }
 
@@ -91,6 +100,8 @@
     line-height: 144.023%;
 }
 
-/* span{
-    padding: 1rem 0;
-} */
+.error{
+    font-size: 0.8rem;
+    color: #ED5353;
+    font-weight: 500;
+}

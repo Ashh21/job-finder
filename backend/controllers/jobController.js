@@ -1,4 +1,4 @@
-const { JsonWebTokenError } = require('jsonwebtoken')
+
 const JobData = require('../models/jobModel')
 
 const createJob = async (req, res, next) => {
@@ -10,12 +10,8 @@ const createJob = async (req, res, next) => {
                 message: 'All fields required! '
             })
         }
-        let skillsArray = skillsRequired
-        if (typeof skillsRequired === String) {
-            skillsArray = skillsRequired.split(',').map(e => e.trim())
-        }
 
-        const newJob = await JobData.create({ ...req.body, userId: req.user._id, skillsRequired: skillsArray, updatedAt: null, })
+        const newJob = await JobData.create({ ...req.body, userId: req.user._id, updatedAt: null, })
         res.status(200).json({
             message: 'Job created successfully',
             newJob

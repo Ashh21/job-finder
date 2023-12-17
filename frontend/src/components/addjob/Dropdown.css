@@ -14,20 +14,17 @@
     border: 1px solid #C2C2C2 ;
     width: 6rem;
     border-radius: 0.325rem;
-    color: #ADADAD;
+    outline: none;
 }
 
 .dropdown-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     background-color: #fff;
-    z-index: 1;
 }
 
+/* 
 ul {
     list-style: none;
     margin: 0;
@@ -37,9 +34,8 @@ ul {
 li {
     padding: 10px;
     cursor: pointer;
-    color: #ADADAD;
 }
 
 li:hover {
     background-color: #f0f0f0;
-}
+} */

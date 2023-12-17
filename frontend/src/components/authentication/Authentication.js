@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import '../authentication/Authentication.css';
 import bg from '../images/image 466.svg'
-
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Authentication = () => {
@@ -13,6 +13,7 @@ const Authentication = () => {
     const [password, setPassword] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [error, setError] = useState("")
+    const navigate = useNavigate()
 
     const isNameValid = /^[A-Za-z\s]+$/.test(name);
     const isEmailValid = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(email)
@@ -67,6 +68,7 @@ const Authentication = () => {
                 setEmail('')
                 setPassword('')
                 setError('')
+                navigate('/addJob')
             }
             catch (err) { setError(err) }
 

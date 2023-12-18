@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', async (req, res, next) => {
-    try {
+    try { 
         res.status(200).json({
             serverName: "job-listing-server",
             time: new Date(),

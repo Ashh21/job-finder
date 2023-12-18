@@ -15,13 +15,13 @@ const AddJob = () => {
         location: '',
         jobDescription: '',
         aboutCompany: '',
-        skillsRequired: [],
+        skillsRequired: '',
         information: '',
         jobType: '',
         jobPref: '',
     });
-
-    console.log(formData)
+    const signupToken = localStorage.getItem('signupToken')
+    const loginToken = localStorage.getItem('loginToken')
 
     const handleChange = (e) => {
         setFormData({
@@ -33,10 +33,15 @@ const AddJob = () => {
 
     const Post = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/api/job', formData)
-            console.log(response)
-            console.log(response?.data)
-            if (response?.ok) {
+            const response = await axios.post('http://localhost:4000/api/job', formData, {
+                headers: {
+                    body: JSON.stringify(formData),
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${loginToken || signupToken}`,
+                }
+            })
+
+            if (response?.data?.message === "Job created successfully") {
                 alert("jop post created successfully")
                 setFormData({
                     companyName: '',
@@ -46,26 +51,25 @@ const AddJob = () => {
                     location: '',
                     jobDescription: '',
                     aboutCompany: '',
-                    skillsRequired: [],
+                    skillsRequired: '',
                     information: '',
                     jobType: '',
                     jobPref: '',
                 })
             }
+
         }
-        catch (err) { console.error(err) }
+        catch (err) { console.log('something went wrong: ', err) }
 
     }
 
-    const addJobHandler = async (e) => {
-        e.preventDefault()
+    const addJobHandler = async () => {
         await Post()
     }
 
-
     return (
         <div className='add-job-div'>
-            <form className='add-job-form' onSubmit={addJobHandler}>
+            <form className='add-job-form' onSubmit={(e) => e.preventDefault()}>
                 <h1 style={{ fontSize: "2.5rem", fontWeight: "700", paddingBottom: "0.5rem" }}>Add job description</h1>
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }} >Company Name</label>
@@ -116,11 +120,11 @@ const AddJob = () => {
                 <div style={{ paddingTop: "0.75rem", float: "right", paddingRight: "3.7rem", }}>
                     <button style={{
                         backgroundColor: "#fff", border: "1px solid #CECECE", color: "#CECECE", padding: "0.5rem 0.9rem", borderRadius: "0.325rem",
-                    }} type="submit" >Cancel</button>
-                    <button
+                    }}  >Cancel</button>
+                    <button onClick={addJobHandler}
                         style={{
                             backgroundColor: "#ED5353", border: "none", color: "white", padding: "0.5rem 0.9rem", borderRadius: "0.325rem", marginLeft: "0.5rem"
-                        }} type="submit" >+ Add Job</button>
+                        }}  >+ Add Job</button>
                 </div>
             </form>
             <div className='add-job-img'>

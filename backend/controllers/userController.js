@@ -84,9 +84,7 @@ const login = async (req, res, next) => {
 
 const authentication = async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ')[1]
-        // ||  req.headers['authorization']
-        // token = token.split(' ')[1];
+        const token = req.headers.authorization?.split(' ')[1]
         if (!token) {
             res.status(401).json({
                 message: "please provide a valid token"

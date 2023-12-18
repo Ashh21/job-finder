@@ -31,17 +31,18 @@ const Authentication = () => {
 
         if (Object.values(signUpErrors).every(err => err === "")) {
             try {
-                const result = await axios.post('http://localhost:4000/api/register', { name, email, mobile, password })
-                console.log(result)
+                const result = await axios.post('http://localhost:4000/api/register', { name, email, mobile, password }, { headers: { "Content-Type": "application/json" } })
                 if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
-                    localStorage.setItem("signupData", JSON.stringify(result?.data))
+                    localStorage.setItem("signupToken", result?.data?.jwttoken)
+                    navigate('/addJob')
+                    setName('')
+                    setEmail('')
+                    setMobile('')
+                    setPassword('')
+                    setIsChecked(false)
+                    setError('')
                 }
-                setName('')
-                setEmail('')
-                setMobile('')
-                setPassword('')
-                setIsChecked(false)
-                setError('')
+
             }
             catch (err) { setError(err) }
 
@@ -58,17 +59,20 @@ const Authentication = () => {
 
         if (Object.values(loginErrors).every(err => err === "")) {
             try {
-                const result = await axios.post('http://localhost:4000/api/login', { email, password })
-                console.log(result)
+                const result = await axios.post('http://localhost:4000/api/login', { email, password }, {
+                    headers: { "Content-Type": "application/json" },
+                })
 
                 if (result?.data?.message === "Login successful") {
                     alert('Login successful')
-                    localStorage.setItem("loginData", JSON.stringify(result?.data))
+                    localStorage.setItem("loginToken", result?.data?.jwttoken)
+                    navigate('/addJob')
+                    setEmail('')
+                    setPassword('')
+                    setError('')
                 }
-                setEmail('')
-                setPassword('')
-                setError('')
-                navigate('/addJob')
+
+
             }
             catch (err) { setError(err) }
 

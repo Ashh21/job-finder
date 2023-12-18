@@ -11,7 +11,9 @@ const createJob = async (req, res, next) => {
             })
         }
 
-        const newJob = await JobData.create({ ...req.body, userId: req.user._id, updatedAt: null, })
+        const newJob = await JobData.create({
+            ...req.body, userId: req.user._id, updatedAt: null,
+        })
         res.status(200).json({
             message: 'Job created successfully',
             newJob

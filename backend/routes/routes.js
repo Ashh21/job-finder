@@ -10,8 +10,7 @@ router
     .post('/job', authentication, createJob,)
     .patch('/job/:id', authentication, updateJob,)
     .get('/job', authentication, getFilterdData)
-    .get('/job/:id', authentication, getJobDetails)
+    .get('/job/:id', getJobDetails) 
 
 
-
-module.exports = router 
+module.exports = router  

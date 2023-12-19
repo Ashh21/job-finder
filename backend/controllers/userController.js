@@ -33,7 +33,7 @@ const create = async (req, res, next) => {
     }
     catch (error) {
         next(error)
-    }
+    } 
 }
 
 const login = async (req, res, next) => {

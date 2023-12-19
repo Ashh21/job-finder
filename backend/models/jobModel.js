@@ -8,7 +8,7 @@ const jobSchema = new Schema({
     logoUrl: { type: String, required: true },
     jobPosition: { type: String, required: true },
     salary: { type: String, required: true },
-    jobType: { type: String, enum: ['full', 'part-time'], required: true },
+    jobType: { type: String, enum: ['full-time', 'part-time'], required: true },
     jobPref: { type: String, enum: ['Remote', 'Office'], required: true },
     location: { type: String, required: true },
     jobDescription: { type: String, required: true },

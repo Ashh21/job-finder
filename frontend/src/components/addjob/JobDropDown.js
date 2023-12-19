@@ -3,7 +3,7 @@ import React, { } from 'react';
 import './Dropdown.css';
 
 const JobDropdown = ({ jobType, handleChange }) => {
-    const options = ['full', 'part-time']
+    const options = ['full-time', 'part-time']
 
     return (
         <div className="dropdown-container">

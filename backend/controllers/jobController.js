@@ -44,6 +44,21 @@ const updateJob = async (req, res, next) => {
     }
 }
 
+const getAllJobs = async (req, res, next) => {
+    try {
+        const jobs = await JobData.find()
+        if (!jobs) {
+            return res.status(404).json({
+                message: 'Job not found',
+            })
+        }
+        res.status(200).json({
+            jobs
+        })
+    }
+    catch (err) { next(err) }
+}
+
 const getFilterdData = async (req, res, next) => {
     try {
         const { skillsRequired } = req.query;
@@ -85,4 +100,4 @@ const getJobDetails = async (req, res, next) => {
     }
 }
 
-module.exports = { createJob, updateJob, getFilterdData, getJobDetails }
+module.exports = { createJob, updateJob, getAllJobs, getFilterdData, getJobDetails }

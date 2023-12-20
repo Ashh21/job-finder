@@ -2,10 +2,10 @@ import React from 'react'
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const JobDetails = ({ jobDetails }) => {
-    console.log(jobDetails)
+    const createdAt = jobDetails?.createdAt;
     return (
         <div style={{ padding: "1rem 2rem", }} >
-            <p style={{ fontSize: "0.8rem", color: "#999999" }}>{formatDistanceToNow(new Date(jobDetails?.createdAt), { addSuffix: true })} . {jobDetails?.jobType}</p>
+            <p style={{ fontSize: "0.8rem", color: "#999999" }}>  {formatDistanceToNow(new Date(createdAt), { addSuffix: true })}   {jobDetails?.jobType}</p>
 
             <div style={{ display: 'flex', justifyContent: "space-between", padding: "0.5rem 0" }}>
                 <div >
@@ -41,7 +41,7 @@ const JobDetails = ({ jobDetails }) => {
                             margin: "0 0.5rem 0 0",
                             padding: '0.25rem 0.5rem',
                             color: "#595959", backgroundColor: "#FFEEEE", borderRadius: '1rem'
-                        }}>
+                        }} key={skills.id}>
                             {skills}
                         </p>)
                     }

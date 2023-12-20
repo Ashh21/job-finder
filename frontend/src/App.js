@@ -3,6 +3,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom'
 import { Authentication } from './components/authentication/Authentication';
 import { AddJob } from './components/addjob/AddJob';
 import { ViewJob } from './components/viewjob/ViewJob';
+import { Home } from './components/home/Home';
 
 const App = () => {
   return (
@@ -20,6 +21,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/',
         element: <Authentication />,
+      },
+      {
+        path: '/jobs',
+        element: <Home />
       },
       {
         path: '/addJob',

@@ -27,6 +27,7 @@
     border-radius: 0.35rem;
     padding-left: 1rem;
     position: relative;
+    padding-left: 2rem;
 }
 
 ::placeholder {
@@ -60,7 +61,7 @@
     text-align: center;
     width: 6rem;
     height: 1.5rem;
-    margin: 0 0.5rem ;
+    margin: 0 0 0 0.5rem;
 }
 
 .details-btn {
@@ -70,4 +71,17 @@
     color: #FFF;
     border-radius: 0.35rem;
     border: none;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+.job-btn {
+    background-color: #ED5353;
+    border: none;
+    color: white;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.325rem;
+    margin-top: 0.5rem;
+    
 }

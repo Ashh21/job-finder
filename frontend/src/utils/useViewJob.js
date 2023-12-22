@@ -9,12 +9,11 @@ const useViewJob = (jobId) => {
                 const data = await fetch(`http://localhost:4000/api/job/${jobId}`)
                 const json = await data.json()
                 setJobDetails(json?.job)
-                console.log(json?.job)
             }
             fetchData()
         } catch (err) { }
     }, [jobId])
-    return jobDetails
+    return {jobDetails, jobId}
 
 }
 

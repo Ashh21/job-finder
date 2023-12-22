@@ -6,6 +6,7 @@ import { ViewJob } from './components/viewjob/ViewJob';
 import { Home } from './components/home/Home';
 
 const App = () => {
+  
   return (
     <div className="App">
       <Outlet />

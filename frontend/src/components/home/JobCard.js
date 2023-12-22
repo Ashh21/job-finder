@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const JobCard = ({ job }) => {
+
     return (
         <div className='job-card-div'>
             <div className='job-card-left-div'>
@@ -10,8 +12,8 @@ const JobCard = ({ job }) => {
                 </div>
 
                 <div style={{ display: "flex" }}>
-                    {job?.skillsRequired.map(skills => (
-                        <p className='skills' key={skills.id}>{skills}</p>
+                    {job?.skillsRequired.map((skills, index) => (
+                        <p className='skills' key={index}>{skills}</p>
                     ))}
                 </div>
             </div>
@@ -26,7 +28,9 @@ const JobCard = ({ job }) => {
                     <p>{job?.jobPref}</p>
                     <p style={{ padding: " 0 0.5rem " }}>{job?.jobType}</p>
                 </div>
-                <button className='details-btn'>View Details</button>
+                <Link to={"/viewJob/" + job?._id}>
+                    <button className='details-btn'>  View Details </button>
+                </Link>
             </div>
 
         </div>

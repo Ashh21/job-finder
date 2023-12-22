@@ -7,8 +7,8 @@ import { JobDetails } from './JobDetails'
 
 const ViewJob = () => {
     const { jobId } = useParams();
-    const jobDetails = useViewJob(jobId);
-
+    const {jobDetails} = useViewJob(jobId);
+    
     return (
         <div className='view-job'>
             <Header />

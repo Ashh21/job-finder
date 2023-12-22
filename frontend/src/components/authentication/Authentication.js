@@ -35,7 +35,7 @@ const Authentication = () => {
                 if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
                     localStorage.setItem("signupToken", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
-                    navigate('/addJob')
+                    navigate('/jobs')
                     setName('')
                     setEmail('')
                     setMobile('')
@@ -68,7 +68,7 @@ const Authentication = () => {
                     alert('Login successful')
                     localStorage.setItem("loginToken", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
-                    navigate('/addJob')
+                    navigate('/jobs')
                     setEmail('')
                     setPassword('')
                     setError('')

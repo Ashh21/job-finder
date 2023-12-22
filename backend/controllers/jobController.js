@@ -12,7 +12,7 @@ const createJob = async (req, res, next) => {
         }
 
         const newJob = await JobData.create({
-            ...req.body, userId: req.user._id, updatedAt: null,
+            ...req.body, userId: req.user._id, updatedAt: null, skillsRequired: skillsRequired.split(',').filter(e => e.length !== 0).map(e => e.trim()),
         })
         res.status(200).json({
             message: 'Job created successfully',
@@ -34,9 +34,10 @@ const updateJob = async (req, res, next) => {
                 message: 'All fields required! '
             })
         }
-        const job = await JobData.findByIdAndUpdate(id, { $set: req.body, updatedAt: Date.now() }).lean()
+        const job = await JobData.findByIdAndUpdate(id, { $set: req.body, updatedAt: Date.now(), }).lean()
         res.status(200).json({
-            job
+            job,
+            message: "success"
         })
     }
     catch (err) {
@@ -61,18 +62,16 @@ const getAllJobs = async (req, res, next) => {
 
 const getFilterdData = async (req, res, next) => {
     try {
-        const { skillsRequired } = req.query;
-        if (!skillsRequired || !skillsRequired.trim() === '') {
-            return res.status(404).json({
-                message: "SkillsRequired and jobTitle parameter is missing!"
-            })
+        const filters = {}
+        if (req.query.skillsRequired) {
+            filters.skillsRequired = { $in: req.query.skillsRequired.split(',').map(e => e.trim()) }
         }
 
-        const filter = {
-            skillsRequired: { $in: skillsRequired.split(',').map(e => e.trim()) },
+        if (req.query.jobPosition) {
+            filters.jobPosition = req.query.jobPosition
         }
 
-        const filteredJobs = await JobData.find(filter);
+        const filteredJobs = await JobData.find(filters);
         res.status(200).json(filteredJobs);
 
     }

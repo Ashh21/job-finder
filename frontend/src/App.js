@@ -3,8 +3,8 @@ import { Outlet, createBrowserRouter } from 'react-router-dom'
 import { AddJob } from './components/addjob/AddJob';
 import { ViewJob } from './components/viewjob/ViewJob';
 import { Home } from './components/home/Home';
-import { SignUp } from './components/authentication/SignUp';
 import { Login } from './components/authentication/Login';
+import { SignUp } from './components/authentication/SignUp';
 
 const App = () => {
 
@@ -22,6 +22,10 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Home />
+      },
+      {
+        path: '/signup',
         element: <SignUp />,
       },
       {

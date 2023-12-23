@@ -5,18 +5,23 @@ import { Header } from '../header/Header'
 import { JobCard } from './JobCard'
 import { useNavigate } from 'react-router-dom'
 import { StateContext } from '../../utils/useContext'
-import { useAuth } from '../../utils/useAuth'
+import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
 
 const Home = () => {
     const jobs = useGetAllJobs()
     const navigate = useNavigate()
-    const { isLoggedIn } = useAuth()
+    const { isLoggedIn } = useIsLoggedIn()
     const { setEditId, setEditing } = useContext(StateContext)
 
+
     const handleAddJob = () => {
-        setEditing(false)
-        setEditId('')
-        navigate('/addJob')
+        if (!isLoggedIn) {
+            navigate('/login')
+        } else {
+            setEditing(false)
+            setEditId('')
+            navigate('/addJob')
+        }
     }
 
     return (

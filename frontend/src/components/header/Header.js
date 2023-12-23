@@ -4,7 +4,7 @@ import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
-    const isLoggedIn = useIsLoggedIn()
+    const { isLoggedIn } = useIsLoggedIn()
     const userName = localStorage.getItem('userName')
     const navigate = useNavigate()
 
@@ -16,8 +16,8 @@ const Header = () => {
 
     return (
         <div className='header'>
-            <div onClick={() => navigate('/jobs')}
-            style={{ padding: "1.5rem 7.8rem", color: "white", zIndex: "10", fontSize: "1.5rem", cursor: "pointer" }}>Jobfinder</div>
+            <div onClick={() => navigate('/')}
+                style={{ padding: "1.5rem 7.8rem", color: "white", zIndex: "10", fontSize: "1.5rem", cursor: "pointer" }}>Jobfinder</div>
 
             {isLoggedIn ?
                 (<div style={{ display: "flex", alignItems: "center", padding: "1.5rem 7.8rem", zIndex: "10" }}>
@@ -36,11 +36,11 @@ const Header = () => {
                             }}>Login</button>
                     </Link>
 
-                    <Link to='/'>
+                    <Link to='/signup'>
                         <button
                             style={{
                                 background: "#fff", border: "none", borderRadius: "0.35rem", width: "5rem",
-                                outline: "none", color: '#ED5353', height: "2rem", 
+                                outline: "none", color: '#ED5353', height: "2rem",
                             }}>
                             Register</button>
                     </Link>

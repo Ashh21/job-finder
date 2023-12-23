@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 const AddJob = () => {
     const { formData, newFormData, addJob, updateJob } = useAddJob()
-    const { editing, editId, } = useContext(StateContext)
+    const { editing, } = useContext(StateContext)
     const { companyName, logoUrl, jobPosition, salary, location, jobDescription, aboutCompany, skillsRequired, information, jobType, jobPref } = formData;
     const { setCompanyName, setLogoUrl, setJobPosition, setSalary, setLocation, setJobDescription, setAboutCompany, setSkillsRequired, setInformation, setJobType, setJobPref } = newFormData
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ const AddJob = () => {
     }
 
     const cancelJobHandler = () => {
-        navigate(`/viewJob/${editId}`)
+        navigate(`/jobs`)
         setCompanyName('')
         setLogoUrl('')
         setJobPosition('')

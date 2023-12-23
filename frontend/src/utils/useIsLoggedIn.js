@@ -13,7 +13,7 @@ const useIsLoggedIn = () => {
     }, [token])
 
 
-    return isLoggedIn;
+    return { isLoggedIn };
 }
 
 export { useIsLoggedIn }

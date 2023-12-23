@@ -61,7 +61,7 @@ const useAddJob = () => {
             if (response?.data?.error?.message === "jwt expired") {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userName');
-                navigate('/')
+                navigate('/login')
             }
 
         }
@@ -107,7 +107,7 @@ const useAddJob = () => {
             if (response?.data?.error?.message === "jwt expired") {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userName');
-                navigate('/')
+                navigate('/login')
             }
 
         } catch (err) {
@@ -116,8 +116,6 @@ const useAddJob = () => {
     }
 
     useEffect(() => {
-        console.log(editId)
-        console.log(editing)
         if (editing) {
             fetchDataById()
         }

@@ -13,7 +13,7 @@ const Login = () => {
     }
 
     const toggle = () => {
-        navigate('/')
+        navigate('/signup')
     }
 
     return (

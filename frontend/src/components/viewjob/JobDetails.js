@@ -2,18 +2,26 @@ import React, { useContext } from 'react'
 // import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useNavigate, useParams } from 'react-router-dom';
 import { StateContext } from '../../utils/useContext';
+import { useIsLoggedIn } from '../../utils/useIsLoggedIn';
 
 
 const JobDetails = ({ jobDetails }) => {
 
     const { setEditId, setEditing } = useContext(StateContext)
     const { jobId } = useParams()
+    const { isLoggedIn } = useIsLoggedIn()
+    // const token = localStorage ? localStorage.getItem('token') : null
     const navigate = useNavigate()
 
     const handleEdit = () => {
-        setEditing(true)
-        setEditId(jobId)
-        navigate('/addJob')
+        if (!isLoggedIn) {
+            navigate('/login')
+        }
+        else {
+            setEditing(true)
+            setEditId(jobId)
+            navigate('/addJob')
+        }
     }
 
     // const createdAt = jobDetails?.createdAt;

@@ -5,13 +5,15 @@ import { JobDropdown } from './JobDropDown'
 import bg from '../images/WallpaperDog-20567151 1.svg'
 import { useAddJob } from '../../utils/useAddJob'
 import { StateContext } from '../../utils/useContext'
+import { useNavigate } from 'react-router-dom'
 
 
 const AddJob = () => {
     const { formData, newFormData, addJob, updateJob } = useAddJob()
-    const { editing } = useContext(StateContext)
+    const { editing, editId, } = useContext(StateContext)
     const { companyName, logoUrl, jobPosition, salary, location, jobDescription, aboutCompany, skillsRequired, information, jobType, jobPref } = formData;
     const { setCompanyName, setLogoUrl, setJobPosition, setSalary, setLocation, setJobDescription, setAboutCompany, setSkillsRequired, setInformation, setJobType, setJobPref } = newFormData
+    const navigate = useNavigate()
 
 
     const addJobHandler = async () => {
@@ -20,7 +22,21 @@ const AddJob = () => {
         } else {
             await addJob()
         }
+    }
 
+    const cancelJobHandler = () => {
+        navigate(`/viewJob/${editId}`)
+        setCompanyName('')
+        setLogoUrl('')
+        setJobPosition('')
+        setSalary('')
+        setLocation('')
+        setJobDescription('')
+        setAboutCompany('')
+        setSkillsRequired('')
+        setInformation('')
+        setJobType('')
+        setJobPref('')
     }
 
     return (
@@ -74,11 +90,12 @@ const AddJob = () => {
                     type='text' placeholder="Enter the additional information" /> <br />
 
                 <div style={{ paddingTop: "0.75rem", float: "right", paddingRight: "3.7rem", }}>
-                    <button style={{
-                        backgroundColor: "#fff", border: "1px solid #CECECE", color: "#CECECE", padding: "0.5rem 0.9rem", borderRadius: "0.325rem",
-                    }}  >Cancel</button>
+                    <button onClick={cancelJobHandler}
+                        style={{
+                            backgroundColor: "#fff", border: "1px solid #CECECE", color: "#CECECE", padding: "0.5rem 0.9rem", borderRadius: "0.325rem",
+                        }}  >Cancel</button>
                     <button onClick={addJobHandler}
-                        className='job-btn' >+ Add Job</button>
+                        className='job-btn' >{editing ? "Save Job" : "+ Add Job"}</button>
                 </div>
             </form>
             <div className='add-job-img'>

@@ -56,7 +56,7 @@ const JobDetails = ({ jobDetails }) => {
                             margin: "0 0.5rem 0 0",
                             padding: '0.25rem 0.5rem',
                             color: "#595959", backgroundColor: "#FFEEEE", borderRadius: '1rem'
-                        }} key={skills?.index}>
+                        }} key={index}>
                             {skills}
                         </p>)
                     }

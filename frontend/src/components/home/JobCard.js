@@ -1,7 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
+import { StateContext } from '../../utils/useContext'
 
 const JobCard = ({ job }) => {
+    const { isLoggedIn } = useIsLoggedIn()
+    const { setEditId, setEditing } = useContext(StateContext)
+    const { jobId } = useParams()
+    const navigate = useNavigate()
+
+    const handleEdit = () => {
+        setEditing(true)
+        setEditId(job?._id)
+        navigate('/addJob')
+    }
 
     return (
         <div className='job-card-div'>
@@ -28,12 +40,18 @@ const JobCard = ({ job }) => {
                     <p>{job?.jobPref}</p>
                     <p style={{ padding: " 0 0.5rem " }}>{job?.jobType}</p>
                 </div>
-                <Link to={"/viewJob/" + job?._id}>
-                    <button className='details-btn'>  View Details </button>
-                </Link>
+
+                <div>
+                    {!isLoggedIn ? <button onClick={handleEdit}
+                        className='details-btn'> Edit Job </button> : ''}
+
+                    <Link to={"/viewJob/" + job?._id}>
+                        <button className='details-btn'>  View Details </button>
+                    </Link>
+                </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 

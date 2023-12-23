@@ -1,21 +1,53 @@
 import React from 'react'
 import '../header/Header.css'
+import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
+    const isLoggedIn = useIsLoggedIn()
+    const userName = localStorage.getItem('userName')
+    const navigate = useNavigate()
+
+    const logoutHandler = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        navigate('/')
+    }
+
     return (
         <div className='header'>
-            <div style={{ padding: "1.5rem 7.8rem", color: "white", zIndex: "10", fontSize: "1.5rem" }}>Jobfinder</div>
-            <div style={{ padding: "1.5rem 7.8rem", zIndex: "10" }}>
-                <button style={{
-                    background: "#ED5353", border: "1px solid #fff", borderRadius: "0.35rem",
-                    outline: "none", color: 'white', width: "5rem", height: "2rem", margin: " 0 0.75rem"
-                }}>Login</button>
-                <button style={{
-                    background: "#fff", border: "none", borderRadius: "0.35rem", width: "5rem",
-                    outline: "none", color: '#ED5353',  height: "2rem"
-                }}>
-                    Register</button>
-            </div>
+            <div onClick={() => navigate('/jobs')}
+            style={{ padding: "1.5rem 7.8rem", color: "white", zIndex: "10", fontSize: "1.5rem", cursor: "pointer" }}>Jobfinder</div>
+
+            {isLoggedIn ?
+                (<div style={{ display: "flex", alignItems: "center", padding: "1.5rem 7.8rem", zIndex: "10" }}>
+                    <p onClick={logoutHandler}
+                        style={{ color: "white", }}>Logout</p>
+                    <p style={{ color: "white", padding: "0 1rem" }}>Hello! {userName}</p>
+                    <img style={{ width: "3rem", height: "3rem", borderRadius: "3rem" }} src='https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2240,c_limit/phonepicutres-TA.jpghttps://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2240,c_limit/phonepicutres-TA.jpg' alt='pic' />
+                </div>)
+                :
+                (<div style={{ padding: "1.5rem 7.8rem", zIndex: "10" }}>
+                    <Link to='/login'>
+                        <button
+                            style={{
+                                background: "#ED5353", border: "1px solid #fff", borderRadius: "0.35rem",
+                                outline: "none", color: 'white', width: "5rem", height: "2rem", margin: " 0 0.75rem",
+                            }}>Login</button>
+                    </Link>
+
+                    <Link to='/'>
+                        <button
+                            style={{
+                                background: "#fff", border: "none", borderRadius: "0.35rem", width: "5rem",
+                                outline: "none", color: '#ED5353', height: "2rem", 
+                            }}>
+                            Register</button>
+                    </Link>
+                </div>)
+
+
+            }
 
             <svg style={{ position: "absolute", objectFit: "cover", top: "-40%", right: "40%" }} xmlns="http://www.w3.org/2000/svg" width="390" height="94" viewBox="0 0 390 94" fill="none">
                 <path d="M0 0H390L104.665 87.75L93.015 91.4154C68.2633 99.2033 41.5584 87.5523 30.4315 64.1111L0 0Z" fill="#FF6B6B" />

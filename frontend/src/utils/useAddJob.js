@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { StateContext } from "./useContext";
 
 const useAddJob = () => {
- 
+
     const [companyName, setCompanyName] = useState('')
     const [logoUrl, setLogoUrl] = useState('')
     const [jobPosition, setJobPosition] = useState('')
@@ -16,8 +16,7 @@ const useAddJob = () => {
     const [information, setInformation] = useState('')
     const [jobType, setJobType] = useState('')
     const [jobPref, setJobPref] = useState('')
-    const signupToken = localStorage.getItem('signupToken')
-    const loginToken = localStorage.getItem('loginToken')
+    const token = localStorage.getItem('token')
     const navigate = useNavigate()
     const formData = { companyName, logoUrl, jobPosition, salary, location, jobDescription, aboutCompany, skillsRequired, information, jobType, jobPref }
     const newFormData = {
@@ -42,10 +41,9 @@ const useAddJob = () => {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",
-                    'Authorization': `Bearer ${loginToken || signupToken}`,
+                    'Authorization': `Bearer ${token}`,
                 }
             })
-
             if (response?.data?.message === "Job created successfully") {
                 alert("jop post created successfully")
                 setCompanyName("")
@@ -59,6 +57,11 @@ const useAddJob = () => {
                 setInformation("")
                 setJobType("")
                 setJobPref("")
+            }
+            if (response?.data?.error?.message === "jwt expired") {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userName');
+                navigate('/')
             }
 
         }
@@ -94,23 +97,31 @@ const useAddJob = () => {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",
-                    'Authorization': `Bearer ${loginToken || signupToken}`,
+                    'Authorization': `Bearer ${token}`,
                 }
             })
             console.log(response)
-            if (response.data.message === "success") {
+            if (response?.data?.message === "success") {
                 navigate('/jobs')
             }
+            if (response?.data?.error?.message === "jwt expired") {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userName');
+                navigate('/')
+            }
+
         } catch (err) {
             console.log("Error while updating : ", err)
         }
     }
 
     useEffect(() => {
+        console.log(editId)
+        console.log(editing)
         if (editing) {
             fetchDataById()
         }
-    }, [editId])
+    }, [editId, editing])
 
     return { formData, newFormData, addJob, updateJob, }
 }

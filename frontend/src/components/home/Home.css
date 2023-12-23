@@ -73,7 +73,7 @@
     border: none;
     text-decoration: none;
     text-align: center;
-
+    margin-left: 0.5rem;
 }
 
 .job-btn {
@@ -83,5 +83,5 @@
     padding: 0.5rem 0.9rem;
     border-radius: 0.325rem;
     margin-top: 0.5rem;
-    
+
 }

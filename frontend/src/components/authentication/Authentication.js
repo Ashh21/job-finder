@@ -33,7 +33,7 @@ const Authentication = () => {
             try {
                 const result = await axios.post('http://localhost:4000/api/register', { name, email, mobile, password }, { headers: { "Content-Type": "application/json" } })
                 if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
-                    localStorage.setItem("signupToken", result?.data?.jwttoken)
+                    localStorage.setItem("token", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
                     navigate('/jobs')
                     setName('')
@@ -66,7 +66,7 @@ const Authentication = () => {
 
                 if (result?.data?.message === "Login successful") {
                     alert('Login successful')
-                    localStorage.setItem("loginToken", result?.data?.jwttoken)
+                    localStorage.setItem("token", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
                     navigate('/jobs')
                     setEmail('')
@@ -76,10 +76,14 @@ const Authentication = () => {
 
 
             }
-            catch (err) { setError(err) }
+            catch (err) {
+                console.log("login error : ", err)
+                setError(err)
+            }
 
         } else {
             setError(loginErrors)
+
         }
     }
 

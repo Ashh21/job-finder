@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { API_URL } from "./utils"
 
 const useGetAllJobs = () => {
     const [jobs, setJobs] = useState([])
@@ -9,7 +10,7 @@ const useGetAllJobs = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/jobs')
+            const response = await fetch(`${API_URL}/api/jobs`)
             const json = await response?.json()
             setJobs(json?.jobs)
         } catch (err) { console.log("Error while fetching data:", err) }

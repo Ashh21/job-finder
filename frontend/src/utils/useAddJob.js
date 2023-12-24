@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StateContext } from "./useContext";
+import { API_URL } from "./utils";
 
 const useAddJob = () => {
 
@@ -37,7 +38,7 @@ const useAddJob = () => {
 
     const addJob = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/api/job', formData, {
+            const response = await axios.post(`${API_URL}/api/job`, formData, {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",
@@ -57,6 +58,7 @@ const useAddJob = () => {
                 setInformation("")
                 setJobType("")
                 setJobPref("")
+                navigate('/jobs')
             }
             if (response?.data?.error?.message === "jwt expired") {
                 localStorage.removeItem('token');
@@ -70,7 +72,7 @@ const useAddJob = () => {
 
     const fetchDataById = async () => {
         try {
-            const data = await fetch(`http://localhost:4000/api/job/${editId}`)
+            const data = await fetch(`${API_URL}/api/job/${editId}`)
             const json = await data.json()
 
             setCompanyName(json?.job?.companyName)
@@ -93,7 +95,7 @@ const useAddJob = () => {
 
     const updateJob = async () => {
         try {
-            const response = await axios.patch(`http://localhost:4000/api/job/${editId}`, formData, {
+            const response = await axios.patch(`${API_URL}/api/job/${editId}`, formData, {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",

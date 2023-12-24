@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_URL } from './utils'
 
 const useAuth = () => {
     const [name, setName] = useState('')
@@ -27,7 +28,7 @@ const useAuth = () => {
 
         if (Object.values(signUpErrors).every(err => err === "")) {
             try {
-                const result = await axios.post('http://localhost:4000/api/register', { name, email, mobile, password }, { headers: { "Content-Type": "application/json" } })
+                const result = await axios.post(`${API_URL}/api/register`, { name, email, mobile, password }, { headers: { "Content-Type": "application/json" } })
                 if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
                     localStorage.setItem("token", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
@@ -56,7 +57,7 @@ const useAuth = () => {
 
         if (Object.values(loginErrors).every(err => err === "")) {
             try {
-                const result = await axios.post('http://localhost:4000/api/login', { email, password }, {
+                const result = await axios.post(`${API_URL}/api/login`, { email, password }, {
                     headers: { "Content-Type": "application/json" },
                 })
 

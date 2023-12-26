@@ -1,4 +1,6 @@
 .add-job-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -12,6 +14,7 @@
 
 .add-job-form-input {
     width: 70%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0.5rem;
     margin-top: 0.85rem;
@@ -24,12 +27,29 @@
 .add-job-form-input0 {
     width: 70%;
     height: 5rem;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0.5rem;
     margin-top: 0.85rem;
     border-radius: 0.325rem;
     border: 1px solid #C2C2C2;
     outline: none;
+}
+
+::-webkit-input-placeholder {
+    color: #ADADAD;
+}
+
+::-moz-placeholder {
+    color: #ADADAD;
+}
+
+:-ms-input-placeholder {
+    color: #ADADAD;
+}
+
+::-ms-input-placeholder {
+    color: #ADADAD;
 }
 
 ::placeholder {
@@ -39,7 +59,9 @@
 .add-job-img>img {
     width: 40vw;
     height: 100vh;
+    -ms-flex-negative: 0;
     flex-shrink: 0;
+    -o-object-fit: cover;
     object-fit: cover;
 }
 

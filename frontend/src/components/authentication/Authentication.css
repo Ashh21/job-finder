@@ -1,4 +1,6 @@
 .authentication {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -31,7 +33,9 @@
 .authentication-img-div>img {
     width: 37.65vw;
     height: 100vh;
+    -ms-flex-negative: 0;
     flex-shrink: 0;
+    -o-object-fit: cover;
     object-fit: cover;
 }
 
@@ -58,7 +62,7 @@
     outline: none;
 }
 
-.input-err{
+.input-err {
     width: 100%;
     padding: 1rem;
     margin-top: 0.85rem;
@@ -86,6 +90,7 @@
     width: 15.3125rem;
     height: 3.519rem;
     border-radius: 0.325rem;
+    -ms-flex-negative: 0;
     flex-shrink: 0;
     font-size: 1.6rem;
 }
@@ -100,7 +105,7 @@
     line-height: 144.023%;
 }
 
-.error{
+.error {
     font-size: 0.8rem;
     color: #ED5353;
     font-weight: 500;

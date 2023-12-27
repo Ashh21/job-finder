@@ -86,7 +86,6 @@ const useAddJob = () => {
             setInformation(json?.job?.information)
             setJobType(json?.job?.jobType)
             setJobPref(json?.job?.jobPref)
-
         }
         catch (err) { console.log('fetched error: ', err) }
     }
@@ -94,14 +93,13 @@ const useAddJob = () => {
 
     const updateJob = async () => {
         try {
-            const response = await axios.patch(`http://localhost:4000/api/job/${editId}`, formData, {
+            const response = await axios.patch(`${API_URL}/api/job/${editId}`, formData, {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${token}`,
                 }
             })
-            console.log(response)
             if (response?.data?.message === "success") {
                 navigate('/jobs')
             }

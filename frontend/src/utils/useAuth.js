@@ -73,6 +73,7 @@ const useAuth = () => {
             }
             catch (err) {
                 setError(err)
+                
             }
 
         } else {

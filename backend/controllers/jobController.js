@@ -28,16 +28,17 @@ const updateJob = async (req, res, next) => {
     try {
         const { id } = req.params
         const { companyName, logoUrl, jobPosition, salary, jobType, jobPref, location, jobDescription, aboutCompany, skillsRequired, information } = req.body
-
         if (!companyName || !logoUrl || !jobPosition || !salary || !jobType || !jobPref || !location || !jobDescription || !aboutCompany || !skillsRequired || !information) {
             return res.status(400).json({
                 message: 'All fields required! '
             })
         }
         const job = await JobData.findByIdAndUpdate(id, { $set: { ...req.body, skillsRequired: skillsRequired.split(',').filter(e => e.length !== 0).map(e => e.trim()) }, updatedAt: Date.now(), }).lean()
+
         res.status(200).json({
             job,
             message: "success"
+
         })
     }
     catch (err) {

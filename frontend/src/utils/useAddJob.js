@@ -13,7 +13,7 @@ const useAddJob = () => {
     const [location, setLocation] = useState('')
     const [jobDescription, setJobDescription] = useState('')
     const [aboutCompany, setAboutCompany] = useState('')
-    const [skillsRequired, setSkillsRequired] = useState([])
+    const [skillsRequired, setSkillsRequired] = useState('')
     const [information, setInformation] = useState('')
     const [jobType, setJobType] = useState('')
     const [jobPref, setJobPref] = useState('')
@@ -86,8 +86,7 @@ const useAddJob = () => {
             setInformation(json?.job?.information)
             setJobType(json?.job?.jobType)
             setJobPref(json?.job?.jobPref)
-            console.log(" json: ", json)
-            console.log("formdata: ", formData)
+
         }
         catch (err) { console.log('fetched error: ', err) }
     }
@@ -95,7 +94,7 @@ const useAddJob = () => {
 
     const updateJob = async () => {
         try {
-            const response = await axios.patch(`${API_URL}/api/job/${editId}`, formData, {
+            const response = await axios.patch(`http://localhost:4000/api/job/${editId}`, formData, {
                 headers: {
                     body: JSON.stringify(formData),
                     "Content-Type": "application/json",

@@ -15,7 +15,6 @@ const AddJob = () => {
     const { setCompanyName, setLogoUrl, setJobPosition, setSalary, setLocation, setJobDescription, setAboutCompany, setSkillsRequired, setInformation, setJobType, setJobPref } = newFormData
     const navigate = useNavigate()
 
-
     const addJobHandler = async () => {
         if (editing) {
             await updateJob()
@@ -23,6 +22,7 @@ const AddJob = () => {
             await addJob()
         }
     }
+    console.log(skillsRequired)
 
     const cancelJobHandler = () => {
         navigate(`/jobs`)

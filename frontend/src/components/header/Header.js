@@ -2,16 +2,17 @@ import React from 'react'
 import '../header/Header.css'
 import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
 import { Link, useNavigate } from 'react-router-dom'
+import { useLogOut } from '../../utils/useLogOut'
+
 
 const Header = () => {
     const { isLoggedIn } = useIsLoggedIn()
     const userName = localStorage.getItem('userName')
+    const { logout } = useLogOut()
     const navigate = useNavigate()
 
     const logoutHandler = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userName');
-        navigate('/')
+        logout()
     }
 
     return (

@@ -25,8 +25,6 @@ const Home = () => {
         fetchData()
     };
 
-    console.log(searchJobs)
-
     const handleSearch = async () => {
         await fetchData()
     }
@@ -54,7 +52,7 @@ const Home = () => {
             else {
                 const timeRemaining = (decodedToken.exp - currentTime) * 1000
                 setTimeout(logout, timeRemaining)
-                console.log("timeRemaining : ",timeRemaining)
+                console.log("timeRemaining : ", timeRemaining)
             }
         }
     }

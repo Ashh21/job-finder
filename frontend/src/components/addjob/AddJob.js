@@ -22,7 +22,6 @@ const AddJob = () => {
             await addJob()
         }
     }
-    console.log(updateJob())
 
     const cancelJobHandler = () => {
         navigate(`/jobs`)
@@ -45,11 +44,11 @@ const AddJob = () => {
                 <h1 style={{ fontSize: "2.5rem", fontWeight: "700", paddingBottom: "0.5rem" }}>Add job description</h1>
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }} >Company Name</label>
-                <input className='add-job-form-input'  value={companyName} onChange={(e) => setCompanyName(e.target.value)}
+                <input className='add-job-form-input' value={companyName} onChange={(e) => setCompanyName(e.target.value)}
                     type='text' placeholder="Enter your company name here" /> <br />
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }}  >Add logo URL</label>
-                <input className='add-job-form-input'  value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)}
+                <input className='add-job-form-input' value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)}
                     type='text' placeholder="Enter the link" /> <br />
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }}  >Job Position </label>
@@ -68,11 +67,11 @@ const AddJob = () => {
                 <Dropdown jobPref={jobPref} setJobPref={setJobPref} /> <br />
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }}  > Location </label>
-                <input className='add-job-form-input'  value={location} onChange={(e) => setLocation(e.target.value)}
+                <input className='add-job-form-input' value={location} onChange={(e) => setLocation(e.target.value)}
                     type='text' placeholder="Enter Location" /> <br />
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }}  > Job Description </label>
-                <input className='add-job-form-input0'  value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}
+                <input className='add-job-form-input0' value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}
                     type='text' placeholder="Type the job description" /> <br />
 
                 <label style={{ display: "inline-block", width: "9.5rem", fontWeight: "500" }}  > About Company </label>

@@ -1,14 +1,16 @@
-import React from 'react'
+
 import '../viewjob/ViewJob.css'
 import { Header } from '../header/Header'
 import { useParams } from 'react-router-dom'
 import { useViewJob } from '../../utils/useViewJob'
 import { JobDetails } from './JobDetails'
 
+
 const ViewJob = () => {
     const { jobId } = useParams();
-    const {jobDetails} = useViewJob(jobId);
-    
+    const { jobDetails } = useViewJob(jobId);
+   
+
     return (
         <div className='view-job'>
             <Header />

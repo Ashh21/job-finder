@@ -23,7 +23,7 @@ const Header = () => {
             {isLoggedIn ?
                 (<div style={{ display: "flex", alignItems: "center", padding: "1.5rem 7.8rem", zIndex: "10" }}>
                     <p onClick={logoutHandler}
-                        style={{ color: "white", }}>Logout</p>
+                        style={{ color: "white", cursor: 'pointer' }}>Logout</p>
                     <p style={{ color: "white", padding: "0 1rem" }}>Hello! {userName}</p>
                     <img style={{ width: "3rem", height: "3rem", borderRadius: "3rem" }} src='https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2240,c_limit/phonepicutres-TA.jpghttps://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2240,c_limit/phonepicutres-TA.jpg' alt='pic' />
                 </div>)

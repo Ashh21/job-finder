@@ -23,13 +23,12 @@ const create = async (req, res, next) => {
             name, email, mobile, password: encryptPassword
         })
 
-        const jwttoken = jwt.sign({ email, _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
+        const jwttoken = jwt.sign({ email, _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
         res.status(200).json({
             jwttoken,
             reacruiterName: user.name,
             message: `${user.name} registered successfully`
         })
-        // res.redirect()
     }
     catch (error) {
         next(error)
@@ -63,13 +62,12 @@ const login = async (req, res, next) => {
 
         if (isPasswordMatched) {
             const token = { _id: user._id, email: user.email }
-            const jwttoken = jwt.sign(token, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
+            const jwttoken = jwt.sign(token, process.env.JWT_SECRET_KEY, { expiresIn: '24' })
             return res.status(200).json({
                 message: "Login successful",
                 jwttoken,
                 reacruiterName: user.name
             })
-            // res.redirect()
         }
         else {
             res.status(403).json({

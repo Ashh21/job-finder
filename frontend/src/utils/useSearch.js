@@ -13,7 +13,6 @@ const useSearch = (skillsFilter, positionFilter) => {
         }
         catch (err) { console.log('error fetching jobs : ', err) }
     }
-console.log(searchJobs)
 
     useEffect(() => {
         fetchData()

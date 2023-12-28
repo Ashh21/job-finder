@@ -38,13 +38,14 @@ const useAddJob = () => {
 
     const addJob = async () => {
         try {
-            const response = await axios.post(`${API_URL}/api/job`, formData, {
-                headers: {
-                    body: JSON.stringify(formData),
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`,
-                }
-            })
+            const response = await axios.post(`${API_URL}/api/job`, formData,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
+
             if (response?.data?.message === "Job created successfully") {
                 alert("jop post created successfully")
                 setCompanyName("")

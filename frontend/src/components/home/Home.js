@@ -25,6 +25,8 @@ const Home = () => {
         fetchData()
     };
 
+    console.log(searchJobs)
+
     const handleSearch = async () => {
         await fetchData()
     }
@@ -44,6 +46,7 @@ const Home = () => {
         if (token) {
             const decodedToken = jwtDecode(token)
             const currentTime = Date.now() / 1000
+            console.log("expiry : ", decodedToken.exp)
 
             if (decodedToken.exp < currentTime) {
                 logout()
@@ -51,6 +54,7 @@ const Home = () => {
             else {
                 const timeRemaining = (decodedToken.exp - currentTime) * 1000
                 setTimeout(logout, timeRemaining)
+                console.log("timeRemaining : ",timeRemaining)
             }
         }
     }

@@ -33,7 +33,9 @@ const updateJob = async (req, res, next) => {
                 message: 'All fields required! '
             })
         }
-        const job = await JobData.findByIdAndUpdate(id, { $set: { ...req.body, skillsRequired: skillsRequired.split(',').filter(e => e.length !== 0).map(e => e.trim()) }, updatedAt: Date.now(), }).lean()
+        const skills = typeof req.body.skills === 'string' ? req.body.skills.split(/\s*,\s*/).map(skill => skill.trim().toLowerCase()) : req.body.skills;
+
+        const job = await JobData.findByIdAndUpdate(id, { $set: { ...req.body, skillsRequired: skills }, updatedAt: Date.now(), }).lean()
 
         res.status(200).json({
             job,

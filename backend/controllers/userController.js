@@ -62,7 +62,7 @@ const login = async (req, res, next) => {
 
         if (isPasswordMatched) {
             const token = { _id: user._id, email: user.email }
-            const jwttoken = jwt.sign(token, process.env.JWT_SECRET_KEY, { expiresIn: '24' })
+            const jwttoken = jwt.sign(token, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
             return res.status(200).json({
                 message: "Login successful",
                 jwttoken,

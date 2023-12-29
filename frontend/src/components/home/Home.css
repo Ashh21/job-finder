@@ -2,6 +2,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -22,9 +23,6 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
     width: 80%;
     margin: 1.5rem;
     height: 15vh;
@@ -43,6 +41,28 @@
     padding-left: 1rem;
     position: relative;
     padding-left: 2rem;
+}
+
+.filter-input-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    background: #FFF;
+}
+
+.filter-jobs {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 7.25rem;
+    padding-top: 1rem;
 }
 
 ::-webkit-input-placeholder {
@@ -128,5 +148,31 @@
     color: white;
     padding: 0.5rem 0.9rem;
     border-radius: 0.325rem;
-    margin-top: 0.5rem;
 }
+
+.skills-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0.4rem;
+    cursor: pointer;
+    border: 1px solid #C2C2C2;
+    width: 6rem;
+    height: 2rem;
+    border-radius: 0.325rem;
+    outline: none;
+}
+
+/* .dropdown-list {
+    width: 100%;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    background-color: #fff;
+} */

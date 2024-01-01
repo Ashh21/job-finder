@@ -40,8 +40,6 @@ const Home = () => {
         }
     }
 
-    console.log(skillsFilter, "skills filter")
-
     const handleToggle = (value) => {
         const isSelected = skillsFilter.includes(value)
         if (isSelected) {
@@ -56,7 +54,6 @@ const Home = () => {
         if (token) {
             const decodedToken = jwtDecode(token)
             const currentTime = Date.now() / 1000
-            console.log("expiry : ", decodedToken.exp)
 
             if (decodedToken.exp < currentTime) {
                 logout()
@@ -64,7 +61,6 @@ const Home = () => {
             else {
                 const timeRemaining = (decodedToken.exp - currentTime) * 1000
                 setTimeout(logout, timeRemaining)
-                console.log("timeRemaining : ", timeRemaining)
             }
         }
     }
@@ -83,16 +79,16 @@ const Home = () => {
                         onChange={(e) => setPositionFilter(e.target.value)
                         }
                         type='text' placeholder='Type any job title' />
-                    <svg onClick={handleSearch}
-                        style={{ position: "absolute", top: "18.5%", left: "18%", height: '1rem', margin: "0 0.5rem" }} xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                    <svg onClick={handleSearch} style={{ position: "absolute", top: "18.5%", left: "18%", height: '1rem', margin: "0 0.5rem", cursor: "pointer" }}
+                        xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
                         <path d="M21.3073 19.4279L27 25.1193L25.1193 27L19.4279 21.3073C17.3103 23.0049 14.6763 23.9282 11.9622 23.9244C5.35906 23.9244 0 18.5653 0 11.9622C0 5.35906 5.35906 0 11.9622 0C18.5653 0 23.9244 5.35906 23.9244 11.9622C23.9282 14.6763 23.0049 17.3103 21.3073 19.4279ZM18.6411 18.4417C20.3279 16.707 21.2699 14.3818 21.2661 11.9622C21.2661 6.82111 17.1019 2.65827 11.9622 2.65827C6.82111 2.65827 2.65827 6.82111 2.65827 11.9622C2.65827 17.1019 6.82111 21.2661 11.9622 21.2661C14.3818 21.2699 16.707 20.3279 18.4417 18.6411L18.6411 18.4417Z" fill="#9C9C9C" />
                     </svg>
                 </div>
 
                 <div className='filter-jobs'>
-                    <div style={{display: "flex",}}>
-                        <select className="skills-button" multiple
-                            value={skillsFilter}  >
+                    <div style={{ display: "flex", }}>
+                        <select className="skills-button"
+                            value={skillsFilter} multiple  >
                             {options.map((option, index) => (
                                 <option className='dropdown-list' key={index} value={option} onClick={() => handleToggle(option)}
                                 >
@@ -101,9 +97,19 @@ const Home = () => {
                             ))}
                         </select>
 
-                        <div>
+                        <div style={{ display: "flex", }}>
                             {skillsFilter ? skillsFilter.map(item => (
-                                <span key={item.id}>{item}</span>
+                                <div style={{ display: "flex", }}>
+                                    <span className='selected-skills' key={item.id}>{item}
+                                    </span>
+                                    <button onClick={() => handleToggle(item)}
+                                        style={{ border: "none", background: "#FF6B6B" }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                                            <path d="M2 2.00012L16.8729 19.3519" stroke="white" stroke-width="2.36417" stroke-linecap="round" />
+                                            <path d="M2.00024 19.3521L16.8728 2" stroke="white" stroke-width="2.36417" stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
                             )) : ""}
                         </div>
                     </div>
@@ -117,7 +123,6 @@ const Home = () => {
                             className='job-btn '>+ Add job
                         </button>
                     </div>
-
                 </div>
 
             </div>

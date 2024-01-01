@@ -7,7 +7,6 @@ import { Login } from './components/authentication/Login';
 import { SignUp } from './components/authentication/SignUp';
 
 const App = () => {
-
   return (
     <div className="App">
       <Outlet />

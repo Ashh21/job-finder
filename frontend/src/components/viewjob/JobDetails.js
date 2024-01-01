@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-// import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useNavigate, useParams } from 'react-router-dom';
+import { formatDistanceToNow } from "date-fns";
 import { StateContext } from '../../utils/useContext';
 import { useIsLoggedIn } from '../../utils/useIsLoggedIn';
 
@@ -10,7 +10,6 @@ const JobDetails = ({ jobDetails }) => {
     const { setEditId, setEditing } = useContext(StateContext)
     const { jobId } = useParams()
     const { isLoggedIn } = useIsLoggedIn()
-    // const token = localStorage ? localStorage.getItem('token') : null
     const navigate = useNavigate()
 
     const handleEdit = () => {
@@ -24,10 +23,13 @@ const JobDetails = ({ jobDetails }) => {
         }
     }
 
-    // const createdAt = jobDetails?.createdAt;
+    const createdAt = jobDetails?.createdAt
+
     return (
         <div style={{ padding: "1rem 2rem", }} >
-            {/* <p style={{ fontSize: "0.8rem", color: "#999999" }}>  {formatDistanceToNow(new Date(createdAt), { addSuffix: true })}   {jobDetails?.jobType}</p> */}
+            <p style={{ fontSize: "0.8rem", color: "#999999" }}>
+                {createdAt ? formatDistanceToNow(new Date(createdAt), { addSuffix: 'true' }) : ""}
+                - {jobDetails?.jobPref} </p>
 
             <div style={{ display: 'flex', justifyContent: "space-between", padding: "0.5rem 0" }}>
                 <div >
@@ -42,7 +44,7 @@ const JobDetails = ({ jobDetails }) => {
             </div>
 
             <div style={{ display: 'inline-block' }}>
-                {/* <img src='' alt='logo'  /> */}
+                <img src={jobDetails?.logoUrl} alt='logo' />
                 <p style={{ fontSize: "0.8rem", color: "#595959" }}>Rs {jobDetails?.salary}/month</p>
             </div>
 

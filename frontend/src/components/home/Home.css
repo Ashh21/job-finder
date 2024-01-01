@@ -122,6 +122,12 @@
     flex-direction: column;
 }
 
+.job-img {
+    width: 3.25rem;
+    height: 2.25rem;
+    border-radius: 1rem;
+}
+
 .skills {
     background-color: #FFEEEE;
     text-align: center;

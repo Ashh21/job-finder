@@ -22,7 +22,7 @@ const JobCard = ({ job }) => {
         <div className='job-card-div'>
             <div className='job-card-left-div'>
                 <div style={{ display: "flex" }}>
-                    <img src={job?.logoUrl} alt='pic' />
+                    <img className='job-img' src={job?.logoUrl} alt='pic' />
                     <h3 style={{ paddingLeft: "1rem" }}>{job?.companyName}</h3>
                 </div>
 
@@ -33,13 +33,13 @@ const JobCard = ({ job }) => {
                 </div>
             </div>
 
-            <div style={{ padding: "0.35rem 0 0.35rem 3.25rem", display: 'flex' }}>
+            <div style={{ padding: "0.35rem 0 0.35rem 4.25rem", display: 'flex' }}>
                 <p>{job?.salary}</p>
                 <p style={{ padding: " 0 0.5rem " }}>{job?.location}</p>
             </div>
 
             <div style={{ display: "flex", justifyContent: 'space-between' }}>
-                <div style={{ display: "flex", padding: "0.35rem 0 0.35rem 3.25rem" }}>
+                <div style={{ display: "flex", padding: "0.35rem 0 0.35rem 4.25rem" }}>
                     <p>{job?.jobPref}</p>
                     <p style={{ padding: " 0 0.5rem " }}>{job?.jobType}</p>
                 </div>

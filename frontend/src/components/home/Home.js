@@ -8,6 +8,7 @@ import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
 import { useSearch } from '../../utils/useSearch'
 import { jwtDecode } from "jwt-decode";
 import { useLogOut } from '../../utils/useLogOut'
+import { ToastContainer } from 'react-toastify'
 
 const Home = () => {
     const [skillsFilter, setSkillsFilter] = useState([])
@@ -20,10 +21,10 @@ const Home = () => {
     const { setEditId, setEditing } = useContext(StateContext)
     const { logout } = useLogOut()
 
-    const handleClearFilter = () => {
+    const handleClearFilter = async () => {
+        await fetchData()
         setPositionFilter('')
         setSkillsFilter('')
-        fetchData()
     };
 
     const handleSearch = async () => {
@@ -69,14 +70,18 @@ const Home = () => {
         checkTokenExpiry()
     }, [])
 
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <div className='home'>
             <Header />
+            <ToastContainer />
             <div className='filter-div'>
                 <div className='filter-input-div'>
                     <input className='filter-input' value={positionFilter}
-                        onChange={(e) => setPositionFilter(e.target.value)
+                        onChange={(e) => setPositionFilter(e.target.value.toUpperCase())
                         }
                         type='text' placeholder='Type any job title' />
                     <svg onClick={handleSearch} style={{ position: "absolute", top: "18.5%", left: "18%", height: '1rem', margin: "0 0.5rem", cursor: "pointer" }}
@@ -129,9 +134,12 @@ const Home = () => {
 
             <>
                 {
-                    searchJobs?.map(job => (
-                        <JobCard key={job._id} job={job} />
-                    ))
+                    (searchJobs || []).length === 0 ? (
+                        <h1>No Jobs Found</h1>
+                    ) : (
+                        searchJobs?.map(job => (
+                            <JobCard key={job._id} job={job} />
+                        )))
                 }
             </>
         </div>

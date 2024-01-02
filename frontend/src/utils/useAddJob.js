@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StateContext } from "./useContext";
 import { API_URL } from "./utils";
+import { toast } from "react-toastify";
 
 const useAddJob = () => {
 
@@ -36,6 +37,11 @@ const useAddJob = () => {
 
     const { editId, editing } = useContext(StateContext)
 
+    const addJobNotify = () => toast('Job post created successfully ✅ ', {
+        position: "top-center",
+        theme: "light",
+    });
+
     const addJob = async () => {
         try {
             const response = await axios.post(`${API_URL}/api/job`, formData,
@@ -47,7 +53,8 @@ const useAddJob = () => {
                 })
 
             if (response?.data?.message === "Job created successfully") {
-                alert("jop post created successfully")
+                navigate('/jobs')
+                addJobNotify()
                 setCompanyName("")
                 setLogoUrl("")
                 setJobPosition("")
@@ -59,7 +66,6 @@ const useAddJob = () => {
                 setInformation("")
                 setJobType("")
                 setJobPref("")
-                navigate('/jobs')
             }
             if (response?.data?.error?.message === "jwt expired") {
                 localStorage.removeItem('token');
@@ -91,6 +97,10 @@ const useAddJob = () => {
         catch (err) { console.log('fetched error: ', err) }
     }
 
+    const updateJobNotify = () => toast('Job post updated successfully ✅ ', {
+        position: "top-center",
+        theme: "light",
+    });
 
     const updateJob = async () => {
         try {
@@ -102,6 +112,7 @@ const useAddJob = () => {
                 }
             })
             if (response?.data?.message === "success") {
+                updateJobNotify()
                 navigate('/jobs')
             }
             if (response?.data?.error?.message === "jwt expired") {

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { API_URL } from './utils'
 
 const useAuth = () => {
@@ -17,6 +19,16 @@ const useAuth = () => {
     const isMobileValid = /^[6-9]\d{9}$/.test(mobile);
     const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password)
 
+    const loginNotify = () => toast('Login successful ✅ ', {
+        position: "top-center",
+        theme: "light",
+    });
+
+    const signUpNotify = () => toast('User created successfully ✅ ', {
+        position: "top-center",
+        theme: "light",
+    });
+
     const register = async () => {
         const signUpErrors = {
             name: !isNameValid ? "Enter a valid name" : "",
@@ -32,6 +44,7 @@ const useAuth = () => {
                 if (result?.data?.message === `${result?.data?.reacruiterName} registered successfully`) {
                     localStorage.setItem("token", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
+                    signUpNotify()
                     navigate('/jobs')
                     setName('')
                     setEmail('')
@@ -62,7 +75,7 @@ const useAuth = () => {
                 })
 
                 if (result?.data?.message === "Login successful") {
-                    alert('Login successful')
+                    loginNotify()
                     localStorage.setItem("token", result?.data?.jwttoken)
                     localStorage.setItem("userName", result?.data?.reacruiterName)
                     navigate('/jobs')

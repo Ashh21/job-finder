@@ -29,6 +29,11 @@ const useAuth = () => {
         theme: "light",
     });
 
+    const loginErrorNotify = (err) => toast(err?.response?.data?.message, {
+        position: "top-center",
+        theme: "light",
+    })
+
     const register = async () => {
         const signUpErrors = {
             name: !isNameValid ? "Enter a valid name" : "",
@@ -55,7 +60,9 @@ const useAuth = () => {
                 }
 
             }
-            catch (err) { setError(err) }
+            catch (err) {
+                console.log(err)
+            }
 
         } else {
             setError(signUpErrors)
@@ -85,12 +92,9 @@ const useAuth = () => {
                 }
             }
             catch (err) {
-                setError(err)
-                console.log(err)
+                loginErrorNotify(err)
             }
 
-        } else {
-            setError(loginErrors)
         }
     }
 

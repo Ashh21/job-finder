@@ -8,7 +8,6 @@ import { useIsLoggedIn } from '../../utils/useIsLoggedIn'
 import { useSearch } from '../../utils/useSearch'
 import { jwtDecode } from "jwt-decode";
 import { useLogOut } from '../../utils/useLogOut'
-import { ToastContainer } from 'react-toastify'
 
 const Home = () => {
     const [skillsFilter, setSkillsFilter] = useState([])
@@ -77,7 +76,6 @@ const Home = () => {
     return (
         <div className='home'>
             <Header />
-            <ToastContainer />
             <div className='filter-div'>
                 <div className='filter-input-div'>
                     <input className='filter-input' value={positionFilter}

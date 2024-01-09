@@ -4,12 +4,14 @@ import { AddJob } from './components/addjob/AddJob';
 import { ViewJob } from './components/viewjob/ViewJob';
 import { Home } from './components/home/Home';
 import { Login } from './components/authentication/Login';
+import { ToastContainer } from 'react-toastify'
 import { SignUp } from './components/authentication/SignUp';
 
 const App = () => {
   return (
     <div className="App">
       <Outlet />
+      <ToastContainer />
     </div>
   );
 }

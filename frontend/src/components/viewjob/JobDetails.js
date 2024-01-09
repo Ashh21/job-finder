@@ -43,10 +43,7 @@ const JobDetails = ({ jobDetails }) => {
                     }}>Edit job</button>
             </div>
 
-            <div style={{ display: 'inline-block' }}>
-                <img src={jobDetails?.logoUrl} alt='logo' />
-                <p style={{ fontSize: "0.8rem", color: "#595959" }}>Rs {jobDetails?.salary}/month</p>
-            </div>
+            <p style={{ fontSize: "0.8rem", color: "#595959" }}>Rs {jobDetails?.salary}/month</p>
 
             <div >
                 <h3 style={{ padding: "0.85rem 0", fontSize: "1rem" }}>About company</h3>

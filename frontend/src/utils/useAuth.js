@@ -95,6 +95,8 @@ const useAuth = () => {
                 loginErrorNotify(err)
             }
 
+        } else {
+            setError(loginErrors)
         }
     }
 

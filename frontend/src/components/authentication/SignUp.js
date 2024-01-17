@@ -15,7 +15,7 @@ const SignUp = () => {
     const toggle = () => {
         navigate('/login')
     }
-    
+
     return (
         <div className='authentication'>
             <form onSubmit={(e) => e.preventDefault()}
